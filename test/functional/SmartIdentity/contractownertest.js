@@ -16,6 +16,8 @@ contract('SmartIdentity', function(accounts) {
         jill,
         pete,
         override,
+        override1,
+        override2,
         thirdparty;
 
     before("Setup the Smart Identity contract and hydrate the required variables", function() {
@@ -23,6 +25,8 @@ contract('SmartIdentity', function(accounts) {
         jill = accounts[1];
         pete = accounts[2]
         override = owner;
+        override1 = jill;
+        override2 = pete;
         thirdparty = accounts[3];
 
         SmartIdentity.new({from: owner})
@@ -30,12 +34,12 @@ contract('SmartIdentity', function(accounts) {
             smartIdentity = data;
         });
 
-        SmartIdentity1.new({from: pete})
+        SmartIdentity1.new({from: jill})
         .then(function(data1) {
             smartIdentity1 = data1;
         });
 
-        SmartIdentity2.new({from: jill})
+        SmartIdentity2.new({from: pete})
         .then(function(data2) {
             smartIdentity2 = data2;
         });
@@ -97,9 +101,10 @@ contract('SmartIdentity', function(accounts) {
         });
 
         it("jill", function(done) {
-          SmartIdentity.new({from: jill})
+          SmartIdentity1.new({from: jill})
           .then(function(identity) {
-              //identity.getOwner().call()
+              identity1 = identity;
+              //identity1.getOwner().call()
              // identity.setOverride(pete,{from:pete})
              // .then(function(response) {
              //        assert.equal(response.valueOf(), jill, "owner does not match override");
@@ -109,10 +114,10 @@ contract('SmartIdentity', function(accounts) {
         });
 
         it("pete", function(done) {
-          SmartIdentity.new({from: pete})
+          SmartIdentity2.new({from: pete})
           .then(function(identity) {
-              smartIdentity1 = identity
-              //smartIdentity1.getOwner().call()
+              identity2 = identity;
+              //identity2.getOwner().call()
               //smartIdentity1.setOverride(jill,{from:jill})
              // .then(function(response) {
              //        assert.equal(response.valueOf(), jill, "owner does not match override");
