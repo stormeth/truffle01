@@ -35,13 +35,13 @@ contract('SmartIdentity', function(accounts) {
         });
 
         SmartIdentity1.new({from: jill})
-        .then(function(data1) {
-            smartIdentity1 = data1;
+        .then(function(data) {
+            smartIdentity1 = data;
         });
 
         SmartIdentity2.new({from: pete})
-        .then(function(data2) {
-            smartIdentity2 = data2;
+        .then(function(data) {
+            smartIdentity2 = data;
         });
 
         return smartIdentity,
@@ -68,6 +68,28 @@ contract('SmartIdentity', function(accounts) {
               identity.getOwner.call()
               .then(function(response) {
                   assert.equal(response.valueOf(), owner, "owner does not match override");
+                  done();
+              });
+          });
+        });
+
+        it("override1", function(done) {
+          SmartIdentity1.new({from: override1})
+          .then(function(identity) {
+              identity.getOwner.call()
+              .catch(function(error) {
+                  assert.isOk(error, "Expected error has not been caught");
+                  done();
+              });
+          });
+        });
+
+        it("override2", function(done) {
+          SmartIdentity2.new({from: override2})
+          .then(function(identity) {
+              identity.getOwner.call()
+              .catch(function(error) {
+                  assert.isOk(error, "Expected error has not been caught");
                   done();
               });
           });
