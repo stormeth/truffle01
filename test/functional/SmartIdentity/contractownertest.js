@@ -4,11 +4,14 @@
   */
 
 var SmartIdentity = artifacts.require("./SmartIdentity.sol");
+var SmartIdentity1 = artifacts.require("./SmartIdentity.sol");
+var SmartIdentity2 = artifacts.require("./SmartIdentity.sol");
 
 contract('SmartIdentity', function(accounts) {
 
     var smartIdentity,
         smartIdentity1,
+        smartIdentity2,
         owner,
         jill,
         pete,
@@ -27,7 +30,20 @@ contract('SmartIdentity', function(accounts) {
             smartIdentity = data;
         });
 
+        SmartIdentity1.new({from: pete})
+        .then(function(data1) {
+            smartIdentity1 = data1;
+        });
+
+        SmartIdentity2.new({from: jill})
+        .then(function(data2) {
+            smartIdentity2 = data2;
+        });
+
         return smartIdentity,
+        smartIdentity1,
+        smartIdentity2,
+
         owner,
         jill,
         pete,
