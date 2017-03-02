@@ -78,5 +78,18 @@ contract('SmartIdentity', function(accounts) {
                 done();
             });
         });
+
+        it("jill", function(done) {
+          SmartIdentity.new({from: jill})
+          .then(function(identity) {
+             // identity.setOverride(pete,{from:pete})
+             // .then(function(response) {
+             //        assert.equal(response.valueOf(), jill, "owner does not match override");
+              //});
+          });
+          done();
+        });
+
+
     });
 }, 5000);
