@@ -8,6 +8,7 @@ var SmartIdentity = artifacts.require("./SmartIdentity.sol");
 contract('SmartIdentity', function(accounts) {
 
     var smartIdentity,
+        smartIdentity1,
         owner,
         jill,
         pete,
@@ -82,6 +83,7 @@ contract('SmartIdentity', function(accounts) {
         it("jill", function(done) {
           SmartIdentity.new({from: jill})
           .then(function(identity) {
+              //identity.getOwner().call()
              // identity.setOverride(pete,{from:pete})
              // .then(function(response) {
              //        assert.equal(response.valueOf(), jill, "owner does not match override");
@@ -89,6 +91,20 @@ contract('SmartIdentity', function(accounts) {
           });
           done();
         });
+
+        it("pete", function(done) {
+          SmartIdentity.new({from: pete})
+          .then(function(identity) {
+              smartIdentity1 = identity
+              //smartIdentity1.getOwner().call()
+              //smartIdentity1.setOverride(jill,{from:jill})
+             // .then(function(response) {
+             //        assert.equal(response.valueOf(), jill, "owner does not match override");
+              //});
+          });
+          done();
+        });
+
 
 
     });
